@@ -152,19 +152,24 @@ def dataAmount(truePasscode, balance):
 def topUp(truePasscode, balance):
     print('\nYour current balance is £' + str(balance))
     time.sleep(1)
-    amount = int(input('How much would you like to top-up by today? £ '))
+    amount = 1
     balance = balance + amount
-    
-    print('You have topped up your account by £' + str(amount) + '\nYour balance is now £' + str(balance)) 
-    time.sleep(1)
-    print('\nWould you like another service? ')
-    print('Type "y" for yes or "n" for no')
-    restart = input().lower()
-    if restart == 'y':
-        DataBundlePurchase(truePasscode, balance)
-    else:
-        print('Thanks, have a nice day!')
-        return 'Exit'
+    while True: 
+        try:
+            while amount > 0:
+                amount = int(input('How much would you like to top-up by today? £ '))
+                print('You have topped up your account by £' + str(amount) + '\nYour balance is now £' + str(balance)) 
+                time.sleep(1)
+                print('\nWould you like another service? ')
+                print('Type "y" for yes or "n" for no')
+                restart = input().lower()
+                if restart == 'y':
+                    DataBundlePurchase(truePasscode, balance)
+                else:
+                    print('Thanks, have a nice day!')
+        except ValueError:
+            print('Error - Please enter a numerical value to continue.')
+            topUp(truePasscode, balance)
     
 passwordCheck(1234, 34.55)
 
