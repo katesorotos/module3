@@ -86,20 +86,21 @@ def checkBalance(balance):
         return False
     
 def checkNumber(truePasscode, balance):
-    phone_number = "1" 
+    phone_number = '1' 
+    phone_number_2 = '2'
     while True:
         try:
-            while len(int(phone_number)) != 11 or phone_number[0] != "0":
+            while phone_number != phone_number_2:
                 phone_number = int(input('Please enter your phone number to proceed: '))
                 phone_number_2 =  int(input('Please re-enter your phone number: ')) 
+                if phone_number != phone_number_2:
+                    print('Error - The numbers you have entered do not match.')
+                    checkNumber(truePasscode, balance)
+                elif phone_number == phone_number_2:
+                    dataAmount(truePasscode, balance)
             break
         except ValueError:
             print('Error - Please type either a 1, 2 or 3')
-    if phone_number != phone_number_2:
-        print('Error - The numbers you have entered do not match.')
-        checkNumber(truePasscode, balance)
-    elif phone_number == phone_number_2:
-        dataAmount(truePasscode, balance)
 
 
 
