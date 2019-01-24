@@ -104,7 +104,7 @@ def checkNumber(truePasscode, balance):
                     dataAmount(truePasscode, balance)
             break
         except ValueError:
-            print('Error - Please type either a 1, 2 or 3')
+            print('Error - Please type a number to continue')
 
 
 
@@ -115,32 +115,39 @@ def dataAmount(truePasscode, balance):
     print()
     time.sleep(1)
     print('You have £' + str(balance) + ' remaining in your balance. \nHow much money would you like to top up by? ')
-    money = int(input())
+    money = 1
     new_balance = round(balance - money,2)
     
-    if money > max:
-        print('I\'m afraid you are only able to top up by £100 or less')
-        time.sleep(1)
-        print('Transaction cancelled')
-    elif money > balance:
-        print('Amount greater than available balance.')
-        time.sleep(1)
-        print('Transaction cancelled')
-    elif money %5!=0:
-        print('Your top-up amount must be a multiple of 5.')
-    elif money == int(money/5)*5:
-        print('Thanks for your purchase. You now have £' + str(new_balance) + ' left in your account.')
-        time.sleep(1)
-        print('Would you like another service? ')
-        print('Type "y" for yes or "n" for no')
-        restart = input().lower()
-        if restart == 'y':
-            DataBundlePurchase(truePasscode, balance)
-        else:
-            print('Thanks, have a nice day!')
-    else:
-        print('Transaction type not recognised.')
-    
+    while True:
+        try:
+            while money > 0:
+                money = int(input())
+                if money > max:
+                    print('I\'m afraid you are only able to top up by £100 or less')
+                    time.sleep(1)
+                    print('Transaction cancelled')
+                elif money > balance:
+                    print('Amount greater than available balance.')
+                    time.sleep(1)
+                    print('Transaction cancelled')
+                elif money %5!=0:
+                    print('Your top-up amount must be a multiple of 5.')
+                elif money == int(money/5)*5:
+                    print('Thanks for your purchase. You now have £' + str(new_balance) + ' left in your account.')
+                    time.sleep(1)
+                    print('Would you like another service? ')
+                    print('Type "y" for yes or "n" for no')
+                    restart = input().lower()
+                    if restart == 'y':
+                        DataBundlePurchase(truePasscode, balance)
+                    else:
+                        print('Thanks, have a nice day!')
+            break
+        except ValueError:
+            print('Error - Please enter a numerical value to continue.')
+            dataAmount(truePasscode, balance)
+
+        
     
 def topUp(truePasscode, balance):
     print('\nYour current balance is £' + str(balance))
