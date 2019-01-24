@@ -9,10 +9,20 @@ Created on Tue Dec 11 13:52:48 2018
 
 import time 
 
+def passwordCheck(truePasscode, balance):
+    count = 3
+    while count > 0:
+        password_attempt = input('Please enter your password: ')
+        if password_attempt == truePasscode:
+            print('Password OK')
+            return DataBundlePurchase(truePasscode, balance)
+        else:
+            count = count -1
+            print(str('Password incorrect - You have ' + str(count) + ' attempts left'))
+    print('Transaction cancelled - You have used up all of your attempts')
+    
+
 def DataBundlePurchase(truePasscode, balance):
-    if passwordCheck(truePasscode):
-        print('\nPassword OK')
-        
         time.sleep(1)
         
         print('\nTo request your balance enter "1"')
@@ -35,27 +45,29 @@ def DataBundlePurchase(truePasscode, balance):
         if transactionType == 1:
             print('Your balance is: £{}'.format(balance))
             print('Would you like another service? ')
-            print('Type "y" for yes or "n" for no')
-            restart = input().lower()
-            if restart == 'y':
-                DataBundlePurchase(truePasscode, balance)
-            else:
-                print('Thanks, have a nice day!')
-                return 'display balance'
+            print('Type "y" for yes or "n" for no ')
+            
+            restart = input('Please enter your choice: ')
+            while True:
+                try:
+                    while restart == 'y' or restart == 'n':
+                        if restart == 'y':
+                            DataBundlePurchase(truePasscode, balance)
+                        elif restart == 'n':
+                            print('Thanks, have a nice day!')
+                            return 'exit_transaction'
+                    break
+                except ValueError:
+                    print('Error: please make your choice by entering "y" or "n"')           
+        
         elif transactionType == 2:
-             checkNumber(truePasscode, balance)
+            checkNumber(truePasscode, balance)
         elif transactionType == 3:
             topUp(truePasscode, balance)
-#        else:
-#            print('Error: please make your choice by entering "1" or "2"')
-#            return 'Transaction choice error'
-    else: 
-        print('Password incorrect, would you like to try again? ')
-        retryPassword(truePasscode, balance)
-        return 'Incorrect password'
-
-
+        else: 
+            print('this is a test')
         
+
 def retryPassword(truePasscode, balance):
     print('Type "y" for yes or "n" for no')
     retry = input().lower()
@@ -65,12 +77,7 @@ def retryPassword(truePasscode, balance):
         print('Thanks, have a nice day!')
         return 'Retry password exit'
     
-def passwordCheck(truePasscode):
-    attempt = input('Please enter your password ')
-    if attempt == truePasscode:
-        return True 
-    else:
-        return False
+   
     
 def checkBalance(balance):
     if balance > 0:
@@ -79,18 +86,21 @@ def checkBalance(balance):
         return False
     
 def checkNumber(truePasscode, balance):
-    phone_number = 0
+    phone_number = "1" 
     while True:
         try:
-            while len(str(phone_number)) != 11:
-                print('Error - please enter an 11 digit phone number')
-                phone_number = input('Please enter your phone number to proceed: ')
+            while len(int(phone_number)) != 11 or phone_number[0] != "0":
+                phone_number = int(input('Please enter your phone number to proceed: '))
+                phone_number_2 =  int(input('Please re-enter your phone number: ')) 
             break
         except ValueError:
-            print('Error')
-    if len(str(phone_number)) == 11:
-        print('Password OK')
-        dataAmount(truePasscode, balance)  
+            print('Error - Please type either a 1, 2 or 3')
+    if phone_number != phone_number_2:
+        print('Error - The numbers you have entered do not match.')
+        checkNumber(truePasscode, balance)
+    elif phone_number == phone_number_2:
+        dataAmount(truePasscode, balance)
+
 
 
 def dataAmount(truePasscode, balance):
@@ -111,6 +121,8 @@ def dataAmount(truePasscode, balance):
         print('Amount greater than available balance.')
         time.sleep(1)
         print('Transaction cancelled')
+    elif money %5!=0:
+        print('Your top-up amount must be a multiple of 5.')
     elif money == int(money/5)*5:
         print('Thanks for your purchase. You now have £' + str(new_balance) + ' left in your account.')
         time.sleep(1)
@@ -142,7 +154,7 @@ def topUp(truePasscode, balance):
         print('Thanks, have a nice day!')
         return 'Exit'
     
-DataBundlePurchase('1234', 34.55)
+passwordCheck('1234', 34.55)
 
 
     
