@@ -54,26 +54,34 @@ def DataBundlePurchase(truePasscode, balance):
             
             print('Would you like another service? ')
             print('Type "y" for yes or "n" for no ')
+            restart_option(truePasscode, balance)
             
-            restart = ""
-            while True:
-                try:
-                    while restart != 'y' or restart != 'n':
-                        restart = input('Please enter your choice: ')
-                        if restart == 'y':
-                            DataBundlePurchase(truePasscode, balance)
-                        elif restart == 'n':
-                            print('Thanks, have a nice day!')
-                    break
-                except ValueError:
-                    print('Error: please make your choice by entering "y" or "n"')           
         
         elif transactionType == 2:
             checkNumber(truePasscode, balance)
         elif transactionType == 3:
             topUp(truePasscode, balance)
         
-
+def restart_option(truePasscode, balance):
+    restart = ""
+    while True:
+        try:
+            while restart != 'y' or restart != 'n':
+                restart = input('Please enter your choice: ')
+                if restart == 'y':
+                    DataBundlePurchase(truePasscode, balance)
+                elif restart == 'n':
+                    print('Thanks, have a nice day!')
+                else: 
+                    print('Please make a valid response to continue')
+                    restart_option(truePasscode, balance)
+            break
+        except ValueError:
+            print('Error: please make your choice by entering "y" or "n"')  
+    
+        
+        
+                    
 def retryPassword(truePasscode, balance):
     print('Type "y" for yes or "n" for no')
     retry = input().lower()
