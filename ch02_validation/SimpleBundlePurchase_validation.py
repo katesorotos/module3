@@ -66,20 +66,20 @@ def restart_option(truePasscode, balance):
     restart = ""
     while True:
         try:
-            while restart != 'y' or restart != 'n':
-                restart = input('Please enter your choice: ')
-                if restart == 'y':
-                    DataBundlePurchase(truePasscode, balance)
-                elif restart == 'n':
-                    print('Thanks, have a nice day!')
-                else: 
-                    print('Please make a valid response to continue')
+            while 'n' not in restart:
+                restart = input('Please enter your choice: ').lower()
+                if 'n' not in restart and 'y' not in restart:
+                    print('Error: please make your choice by entering "y" or "n"') 
                     restart_option(truePasscode, balance)
+                    
+                elif 'y' in restart:
+                    DataBundlePurchase(truePasscode, balance)
+                elif 'n' in restart:
+                    print('Thanks, have a nice day!')
             break
         except ValueError:
             print('Error: please make your choice by entering "y" or "n"')  
     
-        
         
                     
 def retryPassword(truePasscode, balance):
