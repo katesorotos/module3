@@ -1,0 +1,34 @@
+Ch09 Defining a software project 
+
+Ideation 
+- search  by business type
+- search by business name
+- search by person name
+- each search must return a list of results ordered by distance from user (if searching for a business) or ordered by distance from users search location.
+
+Requirement gathering
+MoSoCoW
+1 Must have - see ideation a and b
+2 Should have - see ideation c
+3 Could have  - front end
+4 Would have  - real data
+
+Development 
+Stack: sql, python, flask, jinja, heroku, api, bootstrap, jquery, css, html, bootstrap, js
+
+Step one: create data (as real data unavailable)
+Step two: create db and tables
+Step three: enter data to tables from step one
+Step four: query api and enter data into tables
+Step five: create functionality
+Step six: create front end using css and html, bootstrap, jquery, js 
+Step seven: attach front to back using flask and jinja
+Step eight: deploy with heroku
+
+Testing
+- Unit test,
+- Try/Except, 
+- Integration test
+
+Deployment 
+- Heroku
