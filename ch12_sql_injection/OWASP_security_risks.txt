@@ -1,0 +1,19 @@
+
+OWASP Top 10 Most Critical Web Application Security Risks
+
+Injection - 
+Flaws occur when an attacker can send hostile data to an interpreter.
+Untrusted data is sent to an interpreter as part of a command or query. 
+Injection flaws are easy to discover when examining code. Scanners and fuzzers can help attackers find injection flaws.
+Can result in data loss, corruption, or disclosure to unauthorized parties, loss of accountability, or denial of access.
+Injection can sometimes lead to complete host takeover.
+The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper authorization.
+
+Broken Authentication -
+Application functions related to authentication and session management are often implemented
+incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit
+other implementation flaws to assume other users’ identities temporarily or permanently.
+Attackers have access to hundreds of millions of valid username and password combinations for credential
+stuffing, default administrative account lists, automated brute force, and dictionary attack tools.
+Attackers have to gain access to only a few accounts, or just one admin account to compromise the system. 
+Depending on the domain of the application, this may allow money laundering, social security fraud, and identity theft, or disclose legally protected highly sensitive information.
